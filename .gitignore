@@ -1,3 +1,7 @@
+# Ignore generated audio files
+*.wav
+!voices/*.wav
+
 # Byte-compiled / optimized / DLL files
 __pycache__/
 *.py[codz]

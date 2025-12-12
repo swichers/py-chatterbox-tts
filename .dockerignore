@@ -1,0 +1,22 @@
+# Ignore the virtual environment folder
+.venv
+venv
+ENV
+
+# Ignore git history (can be huge)
+.git
+.gitignore
+
+# Ignore python cache
+__pycache__
+*.pyc
+*.pyo
+*.pyd
+
+# Ignore local build artifacts
+dist
+build
+eggs
+*.egg-info
+.mypy_cache
+.pytest_cache

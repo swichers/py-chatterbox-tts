@@ -1,0 +1,4 @@
+audio_path = "Picard.wav"
+temperature = 0.36
+cfg_weight = 0.5
+exaggeration = 0.22
