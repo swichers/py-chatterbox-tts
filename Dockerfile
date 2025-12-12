@@ -1,9 +1,6 @@
 FROM python:3.11-slim AS build
 
 ENV POETRY_VERSION=2.2.1 \
-    PIP_NO_CACHE_DIR=off \
-    PIP_DISABLE_PIP_VERSION_CHECK=on \
-    PIP_DEFAULT_TIMEOUT=100 \
     POETRY_HOME="/opt/poetry" \
     POETRY_VIRTUALENVS_IN_PROJECT=true \
     POETRY_NO_INTERACTION=1 \
@@ -12,11 +9,11 @@ ENV POETRY_VERSION=2.2.1 \
 
 ENV PATH="$POETRY_HOME/bin:$VENV_PATH/bin:$PATH"
 
-RUN pip install "poetry==$POETRY_VERSION"
+RUN pip install --no-cache-dir "poetry==$POETRY_VERSION"
 
 WORKDIR $PYSETUP_PATH
 
-COPY poetry.lock pyproject.toml ./
+COPY poetry.lock pyproject.toml LICENSE.txt ./
 
 RUN --mount=type=cache,target=/root/.cache/pypoetry \
     poetry install --only main --no-root --no-ansi
