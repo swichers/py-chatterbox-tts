@@ -16,6 +16,7 @@ dependencies = [
     "uvicorn[standard] (>=0.38.0,<0.39.0)",
     "tts-webui-chatterbox-tts @ git+https://github.com/rsxdalv/chatterbox.git@1a2e63a15632a3c470c3337f44d85f923693a6b0",
     "peft (>=0.18.0,<0.19.0)",
+    "setuptools (>=80.9.0,<81.0.0)",
 ]
 
 [project.urls]
