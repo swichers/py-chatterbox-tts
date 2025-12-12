@@ -2,6 +2,8 @@
 
 A streaming Text-to-Speech service using Chatterbox TTS, wrapped in a FastAPI application.
 
+This was purpose built for a specific project but is generic enough to be used in other projects.
+
 ## Features
 - **Streaming Audio**: Returns audio bytes directly for low-latency playback.
 - **Custom Voices**: Easily add new voices via configuration files.
@@ -63,7 +65,6 @@ Generates audio from text. Returns a WAV audio stream.
 |-----------|------|---------|-------------|
 | `text` | string | **Required** | The text to speak. |
 | `voice` | string | `null` | The ID of the voice to use (e.g., `af_bella`, `tech_guru`). |
-
 | `temperature` | float | `0.7` | Randomness in generation (higher = more varied). |
 | `cfg_weight` | float | `0.5` | Classifier Free Guidance weight. |
 | `exaggeration` | float | `0.5` | Level of emotional exaggeration. |
