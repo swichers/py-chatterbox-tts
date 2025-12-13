@@ -1,5 +1,6 @@
 import logging
 import io
+import torch
 
 from fastapi import FastAPI, HTTPException
 from fastapi.responses import StreamingResponse
@@ -61,4 +62,6 @@ async def synthesize(request: SynthesisRequest):
 
 @app.get("/health")
 async def health():
-    return {"status": "ok", "cuda_available": tts.model is not None}
+    if not tts:
+        return {"status": "unavailable", "cuda_available": False}
+    return {"status": "ok", "cuda_available": torch.cuda.is_available()}
