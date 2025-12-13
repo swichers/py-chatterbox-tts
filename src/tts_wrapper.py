@@ -12,7 +12,7 @@ logging.basicConfig(
 logger = logging.getLogger(__name__)
 
 
-class TTSWrapper:
+class ChatterboxTTSWrapper:
     def __init__(self):
         self.model = None
         self._initialize_model()
@@ -137,7 +137,7 @@ class TTSWrapper:
 
 
 try:
-    tts_service = TTSWrapper()
+    tts = ChatterboxTTSWrapper()
 except Exception:
     logger.critical("Failed to initialize TTS service application-wide.", exc_info=True)
-    tts_service = None
+    tts = None

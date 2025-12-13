@@ -5,7 +5,7 @@ from fastapi import FastAPI, HTTPException
 from fastapi.responses import StreamingResponse
 from pydantic import BaseModel
 from typing import Optional
-from src.service import tts_service
+from src.tts_wrapper import tts
 from src.voice_manager import voice_manager
 
 logging.basicConfig(level=logging.INFO)
@@ -24,7 +24,7 @@ class SynthesisRequest(BaseModel):
 
 @app.on_event("startup")
 async def startup_event():
-    if tts_service is None:
+    if tts is None:
         logger.error("TTS Service failed to initialize!")
     logger.info(f"Loaded voices: {voice_manager.list_voices()}")
 
@@ -37,7 +37,7 @@ async def list_voices():
 
 @app.post("/api/v1/synthesize")
 async def synthesize(request: SynthesisRequest):
-    if not tts_service:
+    if not tts:
         raise HTTPException(status_code=503, detail="TTS Service unavailable")
 
     try:
@@ -50,9 +50,7 @@ async def synthesize(request: SynthesisRequest):
         if request.exaggeration is not None:
             kwargs["exaggeration"] = request.exaggeration
 
-        result = tts_service.synthesize(
-            text=request.text, voice=request.voice, **kwargs
-        )
+        result = tts.synthesize(text=request.text, voice=request.voice, **kwargs)
 
         return StreamingResponse(io.BytesIO(result), media_type="audio/wav")
 
@@ -63,4 +61,4 @@ async def synthesize(request: SynthesisRequest):
 
 @app.get("/health")
 async def health():
-    return {"status": "ok", "cuda_available": tts_service.model is not None}
+    return {"status": "ok", "cuda_available": tts.model is not None}
