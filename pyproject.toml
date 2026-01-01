@@ -3,7 +3,6 @@ name = "py-chatterbox-tts"
 version = "0.1.0"
 description = "A simple TTS server for Chatterbox"
 readme = "README.md"
-license = { file = "LICENSE.txt" }
 authors = [{ name = "Steven Wichers", email = "me@stevenwichers.com" }]
 requires-python = "~3.11"
 dependencies = [
